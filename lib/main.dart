@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  static const Key usernameInputKey = Key('MyHomePage_usernameInputKey');
+  static const Key passwordInputKey = Key('MyHomePage_passwordInputKey');
+  static const Key loginButtonKey = Key('MyHomePage_loginButtonKey');
   const MyHomePage({super.key});
 
   @override
