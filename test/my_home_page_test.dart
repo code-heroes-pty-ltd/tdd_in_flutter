@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:tdd_in_flutter/main.dart';
@@ -15,6 +16,16 @@ void main() {
       expect(find.byKey(MyHomePage.usernameInputKey), findsOneWidget);
       expect(find.byKey(MyHomePage.passwordInputKey), findsOneWidget);
       expect(find.byKey(MyHomePage.loginButtonKey), findsOneWidget);
+    });
+    testWidgets(
+        'GIVEN the Home Page is open '
+        'WHEN I type a value into the password field '
+        'THEN I see the password is obscured ', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyHomePage());
+      await tester.pump();
+
+      final passwordInput = tester.widget(find.byKey(MyHomePage.passwordInputKey)) as TextField;
+      expect(passwordInput.obscureText, true);
     });
   }));
 }
