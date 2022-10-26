@@ -9,7 +9,7 @@ void main() {
         'THEN I see a username input field '
         'AND I see a password input field '
         'AND I see a login button ', (WidgetTester tester) async {
-      await tester.pumpWidget(MyHomePage());
+      await tester.pumpWidget(const MyHomePage());
       await tester.pump();
 
       expect(find.byKey(MyHomePage.usernameInputKey), findsOneWidget);

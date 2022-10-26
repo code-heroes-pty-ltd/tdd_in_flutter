@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return const MyHomePage();
   }
 }
 
@@ -30,7 +30,29 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('TDD'),
         ),
-        body: Container(),
+        body: Column(
+          children: const [
+            TextField(
+              key: MyHomePage.usernameInputKey,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Username',
+              ),
+            ),
+            TextField(
+              key: MyHomePage.passwordInputKey,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+              ),
+            ),
+            ElevatedButton(
+              key: MyHomePage.loginButtonKey,
+              onPressed: null,
+              child: Text('Login'),
+            ),
+          ],
+        ),
       ),
     );
   }
