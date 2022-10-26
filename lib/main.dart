@@ -9,15 +9,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MyHomePage();
+    return MyHomePage();
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   static const Key usernameInputKey = Key('MyHomePage_usernameInputKey');
   static const Key passwordInputKey = Key('MyHomePage_passwordInputKey');
   static const Key loginButtonKey = Key('MyHomePage_loginButtonKey');
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool isLoginButtonEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +41,48 @@ class MyHomePage extends StatelessWidget {
           title: const Text('TDD'),
         ),
         body: Column(
-          children: const [
+          children: [
             TextField(
               key: MyHomePage.usernameInputKey,
-              decoration: InputDecoration(
+              controller: usernameController,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Username',
               ),
+              onChanged: (value) => _checkValue(),
             ),
             TextField(
               key: MyHomePage.passwordInputKey,
+              controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
               ),
+              onChanged: (value) => _checkValue(),
             ),
             ElevatedButton(
               key: MyHomePage.loginButtonKey,
-              onPressed: null,
-              child: Text('Login'),
+              onPressed: isLoginButtonEnabled ? () {
+                /// Login
+              } : null,
+              child: const Text('Login'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _checkValue() {
+    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
+      setState(() {
+        isLoginButtonEnabled = false;
+      });
+    } else {
+      setState(() {
+        isLoginButtonEnabled = true;
+      });
+    }
   }
 }

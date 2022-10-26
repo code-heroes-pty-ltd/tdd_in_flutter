@@ -10,7 +10,7 @@ void main() {
         'THEN I see a username input field '
         'AND I see a password input field '
         'AND I see a login button ', (WidgetTester tester) async {
-      await tester.pumpWidget(const MyHomePage());
+      await tester.pumpWidget(MyHomePage());
       await tester.pump();
 
       expect(find.byKey(MyHomePage.usernameInputKey), findsOneWidget);
@@ -21,7 +21,7 @@ void main() {
         'GIVEN the Home Page is open '
         'WHEN I type a value into the password field '
         'THEN I see the password is obscured ', (WidgetTester tester) async {
-      await tester.pumpWidget(const MyHomePage());
+      await tester.pumpWidget(MyHomePage());
       await tester.pump();
 
       final passwordInput = tester.widget(find.byKey(MyHomePage.passwordInputKey)) as TextField;
@@ -32,11 +32,12 @@ void main() {
         'WHEN I type a value into the username field '
         'AND I type a value into the password field '
         'THEN I see the login button is not disabled ', (WidgetTester tester) async {
-      await tester.pumpWidget(const MyHomePage());
+      await tester.pumpWidget(MyHomePage());
       await tester.pump();
 
       await tester.enterText(find.byKey(MyHomePage.usernameInputKey), 'username');
       await tester.enterText(find.byKey(MyHomePage.passwordInputKey), 'password');
+      await tester.pumpAndSettle();
 
       final loginButton = tester.widget(find.byKey(MyHomePage.loginButtonKey)) as ElevatedButton;
       expect(loginButton.onPressed, isNotNull);
