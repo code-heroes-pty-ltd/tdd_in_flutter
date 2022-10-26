@@ -42,5 +42,31 @@ void main() {
       final loginButton = tester.widget(find.byKey(MyHomePage.loginButtonKey)) as ElevatedButton;
       expect(loginButton.onPressed, isNotNull);
     });
+    testWidgets(
+        'GIVEN the Home Page is open '
+        'WHEN I type a value into the username field '
+        'THEN I see the login button is disabled ', (WidgetTester tester) async {
+      await tester.pumpWidget(MyHomePage());
+      await tester.pump();
+
+      await tester.enterText(find.byKey(MyHomePage.usernameInputKey), 'username');
+      await tester.pumpAndSettle();
+
+      final loginButton = tester.widget(find.byKey(MyHomePage.loginButtonKey)) as ElevatedButton;
+      expect(loginButton.onPressed, isNull);
+    });
+    testWidgets(
+        'GIVEN the Home Page is open '
+        'WHEN I type a value into the password field '
+        'THEN I see the login button is disabled ', (WidgetTester tester) async {
+      await tester.pumpWidget(MyHomePage());
+      await tester.pump();
+
+      await tester.enterText(find.byKey(MyHomePage.passwordInputKey), 'password');
+      await tester.pumpAndSettle();
+
+      final loginButton = tester.widget(find.byKey(MyHomePage.loginButtonKey)) as ElevatedButton;
+      expect(loginButton.onPressed, isNull);
+    });
   }));
 }
