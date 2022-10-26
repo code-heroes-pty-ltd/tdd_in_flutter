@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return const MyHomePage();
   }
 }
 
@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
   static const Key usernameInputKey = Key('MyHomePage_usernameInputKey');
   static const Key passwordInputKey = Key('MyHomePage_passwordInputKey');
   static const Key loginButtonKey = Key('MyHomePage_loginButtonKey');
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TDD in Flutter',
       theme: ThemeData(
         primarySwatch: Colors.orange,
@@ -40,35 +41,42 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('TDD'),
         ),
-        body: Column(
-          children: [
-            TextField(
-              key: MyHomePage.usernameInputKey,
-              controller: usernameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Username',
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                key: MyHomePage.usernameInputKey,
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                ),
+                onChanged: (value) => _checkValue(),
               ),
-              onChanged: (value) => _checkValue(),
-            ),
-            TextField(
-              key: MyHomePage.passwordInputKey,
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+              const SizedBox(height: 20.0,),
+              TextField(
+                key: MyHomePage.passwordInputKey,
+                controller: passwordController,
+                obscureText: true,
+                obscuringCharacter: '*',
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+                onChanged: (value) => _checkValue(),
               ),
-              onChanged: (value) => _checkValue(),
-            ),
-            ElevatedButton(
-              key: MyHomePage.loginButtonKey,
-              onPressed: isLoginButtonEnabled ? () {
-                /// Login
-              } : null,
-              child: const Text('Login'),
-            ),
-          ],
+              const SizedBox(height: 20.0,),
+              ElevatedButton(
+                key: MyHomePage.loginButtonKey,
+                onPressed: isLoginButtonEnabled ? () {
+                  /// Login
+                } : null,
+                child: const Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );
