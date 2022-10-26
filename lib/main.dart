@@ -41,6 +41,7 @@ class MyHomePage extends StatelessWidget {
             ),
             TextField(
               key: MyHomePage.passwordInputKey,
+              obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
